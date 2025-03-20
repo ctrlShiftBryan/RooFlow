@@ -1,10 +1,25 @@
-# RooFlow
+# RooFlow Installer
 
-A package to easily install RooFlow into your project.
+A simple NPM package to easily install the amazing [RooFlow](https://github.com/GreatScottyMac/RooFlow) system into your project.
+
+## What is RooFlow?
+
+RooFlow is a tool created by [GreatScottyMac](https://github.com/GreatScottyMac) that supercharges your AI development experience in VS Code. By providing persistent project context and optimized mode interactions, it transforms how you work with Roo Code.
+
+### ✨ Why RooFlow is Amazing
+
+RooFlow is a game-changer for AI-assisted development because it:
+
+- 🧠 **Maintains deep project understanding** across sessions through its clever Memory Bank system
+- ⚡ **Dramatically reduces token consumption** with optimized prompts and instructions
+- 🔄 **Seamlessly integrates five powerful modes** (Architect, Code, Test, Debug, and Ask)
+- 🚀 **Streamlines your workflow** with automatic context updates and efficient mode switching
+
+For the full details of this impressive tool, visit the [RooFlow GitHub repository](https://github.com/GreatScottyMac/RooFlow).
 
 ## Installation
 
-Add to your project with npm:
+Adding RooFlow to your project is simple:
 
 ```bash
 npm install --save-dev rooflow
@@ -16,14 +31,11 @@ Or with yarn:
 yarn add --dev rooflow
 ```
 
-## What it does
+That's it! This installer will:
 
-When this package is installed as a dependency, it will:
-
-1. Download all RooFlow configuration files from the official GitHub repository
-2. Create the necessary directory structure in your project
-3. Run the insert-variables script to configure the system variables
-4. Set up your project to use RooFlow with VS Code's Roo Code extension
+1. Download all the necessary configuration files from the official repository
+2. Set up the proper directory structure in your project
+3. Configure everything to work with VS Code's Roo Code extension
 
 ## Requirements
 
@@ -32,40 +44,22 @@ When this package is installed as a dependency, it will:
 
 ## Manual Installation
 
-If the automatic installation fails, you can run the install script manually:
+If the automatic installation doesn't work for some reason:
 
 ```bash
 node node_modules/rooflow/install.js
 ```
 
-## File Structure
+## After Installation
 
-The installer creates the following structure in your project:
-
-```
-project-root
- ├── .roo
- |    ├── system-prompt-architect
- |    ├── system-prompt-ask
- |    ├── system-prompt-code
- |    ├── system-prompt-debug
- |    └── system-prompt-test
- ├── .roomodes
- ├── insert-variables.sh
- └── insert-variables.cmd
-```
-
-The `memory-bank` directory will be created automatically when you first use RooFlow.
-
-## Using RooFlow
-
-After installation:
+Start enjoying RooFlow immediately:
 
 1. Open your project in VS Code
-2. Ensure the Roo Code extension is installed
-3. Start a new Roo Code chat and select a mode
-4. For more information, refer to the [RooFlow GitHub repository](https://github.com/GreatScottyMac/RooFlow)
+2. Start a new Roo Code chat and select any of the five integrated modes
+3. Experience the benefits of persistent context and optimized workflows!
+
+For full usage instructions, refer to the [original RooFlow documentation](https://github.com/GreatScottyMac/RooFlow).
 
 ## License
 
-Apache 2.0
+[Apache 2.0](LICENSE)
