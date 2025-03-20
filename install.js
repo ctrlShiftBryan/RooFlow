@@ -140,6 +140,29 @@ function runInsertVariablesScript() {
   }
 }
 
+function cleanupInsertVariablesScripts() {
+  console.log("\nCleaning up insert-variables scripts...");
+  const projectRoot = findProjectRoot();
+  try {
+    const cmdPath = path.join(projectRoot, "insert-variables.cmd");
+    const shPath = path.join(projectRoot, "insert-variables.sh");
+    if (fs.existsSync(cmdPath)) {
+      fs.unlinkSync(cmdPath);
+      console.log(`  Removed ${BLUE}insert-variables.cmd${RESET}`);
+    }
+    if (fs.existsSync(shPath)) {
+      fs.unlinkSync(shPath);
+      console.log(`  Removed ${BLUE}insert-variables.sh${RESET}`);
+    }
+    console.log(`${GREEN}Cleanup completed successfully${RESET}`);
+  } catch (error) {
+    console.error(
+      `${YELLOW}Warning: Failed to clean up insert-variables scripts${RESET}`
+    );
+    console.error(`  Error: ${error.message}`);
+  }
+}
+
 // Main installation function
 async function install() {
   console.log(`${BLUE}RooFlow Installer${RESET}`);
@@ -176,18 +199,13 @@ async function install() {
     );
 
     if (scriptSuccess) {
+      cleanupInsertVariablesScripts();
       if (validationSuccess) {
         console.log(`\n${GREEN}RooFlow installation complete!${RESET}`);
         console.log("Your project is now configured to use RooFlow.");
         console.log("\nDirectory structure created:");
         console.log("  .roo/ - Contains system prompt files");
         console.log("  .roomodes - Mode configuration file");
-        console.log(
-          "  insert-variables.sh - Script to update system variables"
-        );
-        console.log(
-          "  insert-variables.cmd - Script for Windows command prompt"
-        );
         console.log(
           "\nThe memory-bank directory will be created automatically when you first use RooFlow."
         );
