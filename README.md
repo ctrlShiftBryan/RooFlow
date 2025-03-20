@@ -35,7 +35,9 @@ That's it! This installer will:
 
 1. Download all the necessary configuration files from the official repository
 2. Set up the proper directory structure in your project
-3. Configure everything to work with VS Code's Roo Code extension
+3. Fix duplicate `capabilities` YAML sections in configuration files
+4. Validate the YAML structure of system prompt files
+5. Configure everything to work with VS Code's Roo Code extension
 
 ## Requirements
 

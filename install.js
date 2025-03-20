@@ -4,10 +4,12 @@ const fs = require("fs");
 const path = require("path");
 const { execSync } = require("child_process");
 const https = require("https");
+const yamlSanitizer = require("./yaml-sanitizer"); // Import our YAML sanitizer module
 
 // Colors for terminal output
 const GREEN = "\x1b[32m";
 const BLUE = "\x1b[34m";
+const YELLOW = "\x1b[33m"; // Added yellow for warnings
 const RED = "\x1b[31m";
 const RESET = "\x1b[0m";
 
@@ -163,41 +165,68 @@ async function install() {
       await downloadFile(file.src, file.dest);
     }
     console.log(`\n${GREEN}All files downloaded successfully${RESET}`);
+    yamlSanitizer.fixDuplicateCapabilities(findProjectRoot());
+    if (process.platform !== "win32") {
+      fs.chmodSync(path.join(findProjectRoot(), "insert-variables.sh"), "755");
+    }
+    const scriptSuccess = runInsertVariablesScript();
+
+    const validationSuccess = yamlSanitizer.validateFilesWithYaml(
+      findProjectRoot()
+    );
+
+    if (scriptSuccess) {
+      if (validationSuccess) {
+        console.log(`\n${GREEN}RooFlow installation complete!${RESET}`);
+        console.log("Your project is now configured to use RooFlow.");
+        console.log("\nDirectory structure created:");
+        console.log("  .roo/ - Contains system prompt files");
+        console.log("  .roomodes - Mode configuration file");
+        console.log(
+          "  insert-variables.sh - Script to update system variables"
+        );
+        console.log(
+          "  insert-variables.cmd - Script for Windows command prompt"
+        );
+        console.log(
+          "\nThe memory-bank directory will be created automatically when you first use RooFlow."
+        );
+        console.log("\nTo start using RooFlow:");
+        console.log("  1. Open your project in VS Code");
+        console.log("  2. Ensure the Roo Code extension is installed");
+        console.log('  3. Start a new Roo Code chat and say "Hello"');
+      } else {
+        console.log(
+          `\n${YELLOW}RooFlow installation completed with warnings${RESET}`
+        );
+        console.log(
+          "Some system prompt files may have YAML issues that need manual attention."
+        );
+        console.log(
+          "Your project is configured to use RooFlow, but you may encounter issues."
+        );
+        console.log("\nTo fix YAML issues, you can run the validation again:");
+        console.log("  node node_modules/rooflow/yaml-sanitizer.js");
+      }
+
+      console.log(
+        "\nIf you have any issues with automatic installation, you can always:"
+      );
+      console.log('- Run "npm run setup" in your project');
+      console.log('- Run "node node_modules/rooflow/install.js" directly');
+    } else {
+      console.error(`\n${RED}RooFlow installation encountered issues${RESET}`);
+      console.error("The insert-variables script failed to run.");
+      console.error("You may need to run it manually:");
+      console.error(
+        process.platform === "win32"
+          ? "  insert-variables.cmd or bash ./insert-variables.sh"
+          : "  ./insert-variables.sh"
+      );
+    }
   } catch (error) {
-    console.error(`${RED}Error downloading files:${RESET}`, error.message);
+    console.error(`${RED}Error during installation:${RESET}`, error.message);
     process.exit(1);
-  }
-
-  // Make insert-variables.sh executable
-  if (process.platform !== "win32") {
-    fs.chmodSync(path.join(findProjectRoot(), "insert-variables.sh"), "755");
-  }
-
-  // Run insert-variables script
-  const success = runInsertVariablesScript();
-
-  if (success) {
-    console.log(`\n${GREEN}RooFlow installation complete!${RESET}`);
-    console.log("Your project is now configured to use RooFlow.");
-    console.log("\nDirectory structure created:");
-    console.log("  .roo/ - Contains system prompt files");
-    console.log("  .roomodes - Mode configuration file");
-    console.log("  insert-variables.sh - Script to update system variables");
-    console.log("  insert-variables.cmd - Script for Windows command prompt");
-    console.log(
-      "\nThe memory-bank directory will be created automatically when you first use RooFlow."
-    );
-    console.log("\nTo start using RooFlow:");
-    console.log("  1. Open your project in VS Code");
-    console.log("  2. Ensure the Roo Code extension is installed");
-    console.log('  3. Start a new Roo Code chat and say "Hello"');
-
-    // Additional help for different installation methods
-    console.log(
-      "\nIf you have any issues with automatic installation, you can always:"
-    );
-    console.log('- Run "npm run setup" in your project');
-    console.log('- Run "node node_modules/rooflow/install.js" directly');
   }
 }
 

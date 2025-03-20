@@ -31,7 +31,9 @@
   "devDependencies": {
     "mocha": "^10.2.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  },
   "engines": {
     "node": ">=14.0.0"
   }
