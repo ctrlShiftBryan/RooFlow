@@ -46,10 +46,8 @@ jobs:
           NEW_VERSION=$(node -p "require('./package.json').version")
           echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
 
-      - name: Commit Changes
+      - name: Push Changes
         run: |
-          git add package.json
-          git commit -m "Bump version to ${{ steps.bump-version.outputs.new_version }}"
           git push
           git push --tags
 
