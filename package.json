@@ -1,0 +1,38 @@
+{
+  "name": "rooflow",
+  "version": "1.0.0",
+  "description": "RooFlow installer for VS Code AI-assisted development",
+  "main": "install.js",
+  "bin": {
+    "rooflow": "./install.js"
+  },
+  "scripts": {
+    "postinstall": "node install.js",
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amir-arad/rooflow.git"
+  },
+  "keywords": [
+    "rooflow",
+    "vscode",
+    "ai",
+    "development",
+    "llm",
+    "code-assistant"
+  ],
+  "author": "amir-arad",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/amir-arad/rooflow/issues"
+  },
+  "homepage": "https://github.com/amir-arad/rooflow#readme",
+  "devDependencies": {
+    "mocha": "^10.2.0"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

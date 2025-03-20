@@ -1,0 +1,9 @@
+# Exclude test files and documentation
+test/
+docs/
+examples/
+
+# Exclude development configs
+.eslintrc
+.prettierrc
+.github/
