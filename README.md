@@ -44,7 +44,7 @@ That's it! This installer will:
 
 ## Manual Installation
 
-If the automatic installation doesn't work for some reason:
+If the automatic installation doesn't run (which may happen if npm scripts are disabled in your environment):
 
 ```bash
 node node_modules/rooflow/install.js
