@@ -16,9 +16,9 @@ HOME=$(echo "$HOME")  # Use existing $HOME, but quote it
 WORKSPACE=$(pwd)
 
 # --- Construct Paths ---
-GLOBAL_SETTINGS="$HOME/Library/Application Support/Code/User/globalStorage/rooveterinaryinc.roo-cline/settings/cline_custom_modes.json"
+GLOBAL_SETTINGS="$HOME/Library/Application Support/Cursor/User/globalStorage/rooveterinaryinc.roo-cline/settings/cline_custom_modes.json"
 MCP_LOCATION="$HOME/Documents/Cline/MCP"
-MCP_SETTINGS="$HOME/Library/Application Support/Code/User/globalStorage/rooveterinaryinc.roo-cline/settings/cline_mcp_settings.json"
+MCP_SETTINGS="$HOME/Library/Application Support/Cursor/User/globalStorage/rooveterinaryinc.roo-cline/settings/cline_mcp_settings.json"
 
 # --- Directory Setup ---
 ROO_DIR="$WORKSPACE/.roo"
