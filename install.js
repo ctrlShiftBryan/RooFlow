@@ -16,7 +16,7 @@ const RESET = "\x1b[0m";
 console.log("Rooflow Installer running...");
 // Base URL for raw GitHub content
 const REPO_BASE_URL =
-  "https://raw.githubusercontent.com/GreatScottyMac/RooFlow/main/";
+  "https://raw.githubusercontent.com/ctrlShiftBryan/RooFlow/main/";
 
 // Files to download from GitHub
 const FILES = [
@@ -192,14 +192,15 @@ async function install() {
     if (process.platform !== "win32") {
       fs.chmodSync(path.join(findProjectRoot(), "insert-variables.sh"), "755");
     }
-    const scriptSuccess = runInsertVariablesScript();
+    // const scriptSuccess = runInsertVariablesScript();
+    const scriptSuccess = true;
 
     const validationSuccess = yamlSanitizer.validateFilesWithYaml(
       findProjectRoot()
     );
 
     if (scriptSuccess) {
-      cleanupInsertVariablesScripts();
+      // cleanupInsertVariablesScripts();
       if (validationSuccess) {
         console.log(`\n${GREEN}RooFlow installation complete!${RESET}`);
         console.log("Your project is now configured to use RooFlow.");
