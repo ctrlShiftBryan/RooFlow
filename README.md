@@ -133,7 +133,7 @@ flowchart LR
       ```
    3. Make the script executable:
       ```bash
-      sudo chmod +x insert-variables.sh
+      chmod +x insert-variables.sh
       ```
    4. Run the script:
       ```bash
